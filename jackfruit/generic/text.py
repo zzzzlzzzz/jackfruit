@@ -45,5 +45,7 @@ class TextInputView(GenericView):
         :return: New state
         """
         if update.message and update.message.text:
-            return self.process_data(state, update, context, update.message.text)
+            to_state = self.process_data(state, update, context, update.message.text)
+            state[to_state].show(update, context)
+            return to_state
         return self.get_name()

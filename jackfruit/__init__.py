@@ -25,7 +25,7 @@ class Jackfruit:
         self._root_view = root_view.get_name()
         self.STATE[self._root_view] = root_view
         dispatcher.add_handler(CallbackQueryHandler(self._dispatch))
-        dispatcher.add_handler(MessageHandler(Filters.all, self._dispatch))
+        dispatcher.add_handler(MessageHandler(~Filters.command, self._dispatch))
         if commands:
             for command, state in commands:
                 dispatcher.add_handler(CommandHandler(command, partial(self._dispatch_command, state)))
