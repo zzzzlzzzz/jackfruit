@@ -26,10 +26,10 @@ def test_show_edit(view, update, context):
 
 def test_process_without_data(view, update, context):
     view.process_data = lambda *args, **kwargs: 'processed'
-    assert view.process(dict(), update, context) == view.get_name()
+    assert view.process(dict(processed=view), update, context) == view.get_name()
 
 
 def test_process_with_data(view, update, context):
     view.process_data = lambda *args, **kwargs: 'processed'
     update.message.text = 'Data'
-    assert view.process(dict(), update, context) == 'processed'
+    assert view.process(dict(processed=view), update, context) == 'processed'

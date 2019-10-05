@@ -48,11 +48,11 @@ def test_process_without_data(view, update, context):
 
 def test_process_with_data(view, update, context):
     next_view = deepcopy(view)
-    setattr(update.callback_query, 'data', 'test_view')
+    update.callback_query.data = 'test_view'
     assert view.process(dict(test_view=next_view), update, context) == 'test_view'
 
 
 def test_process_with_custom_data(view, update, context):
     next_view = deepcopy(view)
-    setattr(update.callback_query, 'data', 'omg')
+    update.callback_query.data = 'omg'
     assert view.process(dict(test_view=next_view), update, context) == view.get_name()

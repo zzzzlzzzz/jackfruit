@@ -14,6 +14,7 @@ def update():
             def __init__(self):
                 self.answer_call = False
                 self.message = self.Message()
+                self.data = None
 
             def answer(self, *args, **kwargs):
                 self.answer_call = True
@@ -21,6 +22,7 @@ def update():
         class Message:
             def __init__(self):
                 self.text = None
+                self.photo = None
 
         def __init__(self):
             self.effective_chat = self.Chat()

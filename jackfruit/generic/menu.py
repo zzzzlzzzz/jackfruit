@@ -93,4 +93,4 @@ class MenuView(GenericView):
                 return data
             else:
                 return self.process_data(state, update, context, data, msg_id)
-        return self.get_name()
+        return super().process(state, update, context)

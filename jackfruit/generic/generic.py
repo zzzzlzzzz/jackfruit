@@ -63,3 +63,22 @@ class GenericView:
         :return: New state
         """
         return self.get_name()
+
+
+class GenericInputView(GenericView):
+    def show(self, update: 'Update', context: 'CallbackContext', msg_id: int = None) -> None:
+        """Show help text for user
+
+        :param update: Update object
+        :param context: Callback context
+        :param msg_id: Previous message id, if exists
+        """
+        chat_id = update.effective_chat.id
+        if msg_id:
+            context.bot.edit_message_text(self.get_text(), chat_id, msg_id,
+                                          parse_mode=self.get_parse_mode(),
+                                          disable_web_page_preview=self.get_disable_web_page_preview())
+        else:
+            context.bot.send_message(chat_id, self.get_text(),
+                                     parse_mode=self.get_parse_mode(),
+                                     disable_web_page_preview=self.get_disable_web_page_preview())
