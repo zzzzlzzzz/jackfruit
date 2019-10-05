@@ -66,6 +66,8 @@ class GenericView:
 
 
 class GenericInputView(GenericView):
+    """Using this view directly you can create read-view. User can move from this view only over commands.
+    """
     def show(self, update: 'Update', context: 'CallbackContext', msg_id: int = None) -> None:
         """Show help text for user
 
