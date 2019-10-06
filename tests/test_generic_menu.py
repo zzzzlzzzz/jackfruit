@@ -12,8 +12,8 @@ def view():
     yield MenuViewMock()
 
 
-def test_get_menu_items(view):
-    assert view.get_menu_items() == view.menu_items
+def test_get_menu_items(view, update, context):
+    assert view.get_menu_items(update, context) == view.menu_items
 
 
 def test_process_data(view, update, context):

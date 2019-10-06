@@ -18,9 +18,11 @@ class MenuView(GenericView):
     """
     menu_items = None
 
-    def get_menu_items(self) -> Sequence[Sequence[Tuple[str, str]]]:
+    def get_menu_items(self, update: 'Update', context: 'CallbackContext') -> Sequence[Sequence[Tuple[str, str]]]:
         """Get menu items for show to user
 
+        :param update: Update object
+        :param context: Callback context
         :return: List of menu items tuples
         """
         return self.menu_items
@@ -55,7 +57,7 @@ class MenuView(GenericView):
         :param msg_id: Previous message id, if exists
         """
         buttons = [[self.get_inline_keyboard_button(text, data) for text, data in row]
-                   for row in self.get_menu_items()]
+                   for row in self.get_menu_items(update, context)]
         markup = InlineKeyboardMarkup(buttons)
         chat_id = update.effective_chat.id
         if msg_id:
