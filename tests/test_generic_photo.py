@@ -27,7 +27,6 @@ def test_get_user_input_without_photo(view, update):
     assert not view.get_user_input(update)
 
 
-
 def test_process_data(view, update, context):
     assert view.process_data(dict(), update, context, []) == view.get_name()
 

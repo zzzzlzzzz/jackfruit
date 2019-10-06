@@ -25,6 +25,7 @@ def update():
                 self.photo = None
                 self.audio = None
                 self.document = None
+                self.video = None
 
         def __init__(self):
             self.effective_chat = self.Chat()

@@ -5,12 +5,12 @@ from telegram import Update
 from telegram.ext import Dispatcher, CallbackQueryHandler, CommandHandler, MessageHandler, Filters, CallbackContext
 
 from .generic import (GenericView, GenericDataInputView, MenuView, TextDataInputView, PhotoDataInputView,
-                      AudioDataInputView, DocumentDataInputView)
-from _version import __version__
+                      AudioDataInputView, DocumentDataInputView, VideoDataInputView)
+from ._version import __version__
 
 
 __all__ = ['Jackfruit', 'GenericView', 'GenericDataInputView', 'MenuView', 'TextDataInputView', 'PhotoDataInputView',
-           'AudioDataInputView', 'DocumentDataInputView', ]
+           'AudioDataInputView', 'DocumentDataInputView', 'VideoDataInputView', ]
 
 
 class Jackfruit:
