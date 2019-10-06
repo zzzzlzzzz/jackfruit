@@ -61,12 +61,12 @@ class MenuView(GenericView):
         markup = InlineKeyboardMarkup(buttons)
         chat_id = update.effective_chat.id
         if msg_id:
-            context.bot.edit_message_text(self.get_text(), chat_id, msg_id,
+            context.bot.edit_message_text(self.get_text(update, context), chat_id, msg_id,
                                           parse_mode=self.get_parse_mode(),
                                           disable_web_page_preview=self.get_disable_web_page_preview(),
                                           reply_markup=markup)
         else:
-            context.bot.send_message(chat_id, self.get_text(),
+            context.bot.send_message(chat_id, self.get_text(update, context),
                                      parse_mode=self.get_parse_mode(),
                                      disable_web_page_preview=self.get_disable_web_page_preview(),
                                      reply_markup=markup)

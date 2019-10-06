@@ -26,8 +26,8 @@ def test_parse_mode(view):
     assert view.get_parse_mode() == ParseMode.MARKDOWN
 
 
-def test_get_text(view):
-    assert view.get_text() == 'test'
+def test_get_text(view, update, context):
+    assert view.get_text(update, context) == 'test'
 
 
 def test_show(view, update, context):

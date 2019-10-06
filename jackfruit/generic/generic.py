@@ -38,9 +38,11 @@ class GenericView:
     """
     text = None
 
-    def get_text(self) -> str:
+    def get_text(self, update: 'Update', context: 'CallbackContext') -> str:
         """Get text for show to user
 
+        :param update: Update object
+        :param context: Context object
         :return: Text for show to user
         """
         return self.text
@@ -77,11 +79,11 @@ class GenericDataView(GenericView):
         """
         chat_id = update.effective_chat.id
         if msg_id:
-            context.bot.edit_message_text(self.get_text(), chat_id, msg_id,
+            context.bot.edit_message_text(self.get_text(update, context), chat_id, msg_id,
                                           parse_mode=self.get_parse_mode(),
                                           disable_web_page_preview=self.get_disable_web_page_preview())
         else:
-            context.bot.send_message(chat_id, self.get_text(),
+            context.bot.send_message(chat_id, self.get_text(update, context),
                                      parse_mode=self.get_parse_mode(),
                                      disable_web_page_preview=self.get_disable_web_page_preview())
 
