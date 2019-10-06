@@ -1,4 +1,4 @@
-from typing import Mapping
+from typing import Mapping, Any
 
 from telegram import Update
 from telegram.ext import CallbackContext
@@ -65,7 +65,7 @@ class GenericView:
         return self.get_name()
 
 
-class GenericInputView(GenericView):
+class GenericDataView(GenericView):
     """Using this view directly you can create read-view. User can move from this view only over commands.
     """
     def show(self, update: 'Update', context: 'CallbackContext', msg_id: int = None) -> None:
@@ -84,3 +84,40 @@ class GenericInputView(GenericView):
             context.bot.send_message(chat_id, self.get_text(),
                                      parse_mode=self.get_parse_mode(),
                                      disable_web_page_preview=self.get_disable_web_page_preview())
+
+
+class GenericDataInputView(GenericDataView):
+    def get_user_input(self, update: 'Update') -> Any:
+        """Return user input from update
+
+        :param update: Update object
+        :return: Target user data
+        """
+        return None
+
+    def process_data(self, state: Mapping[str, 'GenericView'], update: 'Update', context: 'CallbackContext',
+                     data: Any) -> str:
+        """Process data contains in update received from user
+
+        :param state: State dict
+        :param update: Update object
+        :param context: Callback context
+        :param data: Data, received from user
+        :return: New state
+        """
+        return self.get_name()
+
+    def process(self, state: Mapping[str, 'GenericView'], update: 'Update', context: 'CallbackContext') -> str:
+        """Process information received from user
+
+        :param state: State dict
+        :param update: Update object
+        :param context: Callback context
+        :return: New state
+        """
+        user_input = self.get_user_input(update)
+        if user_input:
+            to_state = self.process_data(state, update, context, user_input)
+            state[to_state].show(update, context)
+            return to_state
+        return super().process(state, update, context)

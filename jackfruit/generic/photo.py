@@ -5,7 +5,7 @@ from telegram import Update
 from generic import GenericDataInputView
 
 
-class TextDataInputView(GenericDataInputView):
+class PhotoDataInputView(GenericDataInputView):
     def get_user_input(self, update: 'Update') -> Any:
         """Return user input from update
 
@@ -13,6 +13,6 @@ class TextDataInputView(GenericDataInputView):
         :return: Target user data
         """
         try:
-            return update.message.text
+            return update.message.photo
         except AttributeError:
             return None

@@ -1,13 +1,27 @@
 from pytest import fixture
 
-from jackfruit import TextInputView
+from jackfruit import TextDataInputView
 
 
 @fixture()
 def view():
-    class TextInputViewMock(TextInputView):
+    class TextInputViewMock(TextDataInputView):
         pass
     yield TextInputViewMock()
+
+
+def test_get_user_input(view, update):
+    update.message.text = 'data'
+    assert view.get_user_input(update) == update.message.text
+
+
+def test_get_user_input_without_message(view, update):
+    update.message = None
+    assert not view.get_user_input(update)
+
+
+def test_get_user_input_without_text(view, update):
+    assert not view.get_user_input(update)
 
 
 def test_process_data(view, update, context):

@@ -15,7 +15,7 @@ class MainMenu(MenuView):
     menu_items = [[('Enter my name', 'EnterName'), ('Select my age', 'SelectAge')], ]
 
 
-class EnterName(TextInputView):
+class EnterName(TextDataInputView):
     text = 'Enter my name:'
 
     def process_data(self, state, update, context, data):

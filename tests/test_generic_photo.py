@@ -1,13 +1,31 @@
 from pytest import fixture
 
-from jackfruit import ImageInputView
+from jackfruit import PhotoDataInputView
 
 
 @fixture()
 def view():
-    class ImageInputViewMock(ImageInputView):
+    class PhotoInputViewMock(PhotoDataInputView):
         pass
-    yield ImageInputViewMock()
+    yield PhotoInputViewMock()
+
+
+def test_get_user_input(view, update):
+    class PhotoSizeMock:
+        pass
+
+    update.message.photo = [PhotoSizeMock(), ]
+    assert view.get_user_input(update) == update.message.photo
+
+
+def test_get_user_input_without_message(view, update):
+    update.message = None
+    assert not view.get_user_input(update)
+
+
+def test_get_user_input_without_photo(view, update):
+    assert not view.get_user_input(update)
+
 
 
 def test_process_data(view, update, context):
