@@ -2,7 +2,7 @@ from typing import Any
 
 from telegram import Update
 
-from generic import GenericDataInputView
+from .generic import GenericDataInputView
 
 
 class TextDataInputView(GenericDataInputView):

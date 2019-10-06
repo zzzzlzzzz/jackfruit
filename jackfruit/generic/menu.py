@@ -3,7 +3,7 @@ from typing import Mapping, Sequence, Tuple, Any
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, Update
 from telegram.ext import CallbackContext
 
-from generic import GenericView
+from .generic import GenericView
 
 
 class MenuView(GenericView):
