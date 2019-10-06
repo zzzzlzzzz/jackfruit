@@ -80,16 +80,35 @@ def test_register_view(dispatcher, view):
     assert j.STATE[view3.get_name()] == view3
 
 
+def get_dispatch_jackfruit(d, v):
+    class JackfruitMock(Jackfruit):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self._call_before_dispatch = False
+            self._call_after_dispatch = False
+
+        def before_dispatch(self, update, context) -> None:
+            self._call_before_dispatch = True
+
+        def after_dispatch(self, update, context) -> None:
+            self._call_after_dispatch = True
+    return JackfruitMock(d, v)
+
+
 def test_dispatch(dispatcher, view, update, context):
-    j = Jackfruit(dispatcher, view)
+    j = get_dispatch_jackfruit(dispatcher, view)
     j._dispatch(update, context)
 
     assert context.chat_data[j._state_key] == 'new_state'
+    assert j._call_before_dispatch
+    assert j._call_after_dispatch
 
 
 def test_dispatch_command(dispatcher, view, update, context):
-    j = Jackfruit(dispatcher, view)
+    j = get_dispatch_jackfruit(dispatcher, view)
     j._dispatch_command('name', update, context)
 
     assert context.chat_data[j._state_key] == 'name'
     assert view.show_call
+    assert j._call_before_dispatch
+    assert j._call_after_dispatch
