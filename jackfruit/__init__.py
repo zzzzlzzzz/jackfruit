@@ -4,8 +4,8 @@ from typing import Tuple, Optional, Sequence
 from telegram import Update
 from telegram.ext import Dispatcher, CallbackQueryHandler, CommandHandler, MessageHandler, Filters, CallbackContext
 
-from generic import (GenericView, GenericDataInputView, MenuView, TextDataInputView, PhotoDataInputView,
-                     AudioDataInputView)
+from .generic import (GenericView, GenericDataInputView, MenuView, TextDataInputView, PhotoDataInputView,
+                      AudioDataInputView)
 from _version import __version__
 
 
