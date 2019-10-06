@@ -55,4 +55,4 @@ def test_process_with_data(view, update, context):
 def test_process_with_custom_data(view, update, context):
     next_view = deepcopy(view)
     update.callback_query.data = 'omg'
-    assert view.process(dict(test_view=next_view), update, context) == view.get_name()
+    assert view.process(dict(omg=next_view), update, context) == 'omg'

@@ -90,9 +90,7 @@ class MenuView(GenericView):
             data = update.callback_query.data
             update.callback_query.answer(**self.get_answer(data))
             msg_id = update.callback_query.message.message_id
-            if data in state:
-                state[data].show(update, context, msg_id)
-                return data
-            else:
-                return self.process_data(state, update, context, data, msg_id)
+            to_state = data if data in state else self.process_data(state, update, context, data, msg_id)
+            state[to_state].show(update, context, msg_id)
+            return to_state
         return super().process(state, update, context)
