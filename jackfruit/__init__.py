@@ -47,11 +47,13 @@ class Jackfruit:
         :param update: Update object
         :param context: Callback context
         """
-        self.before_dispatch(update, context)
-        context.chat_data[self._state_key] = \
-            self.STATE[context.chat_data.setdefault(self._state_key, self._root_view)]. \
-                process(self.STATE, update, context)
-        self.after_dispatch(update, context)
+        try:
+            self.before_dispatch(update, context)
+            context.chat_data[self._state_key] = \
+                self.STATE[context.chat_data.setdefault(self._state_key, self._root_view)]. \
+                    process(self.STATE, update, context)
+        finally:
+            self.after_dispatch(update, context)
 
     def _dispatch_command(self, state: str, update: 'Update', context: 'CallbackContext') -> None:
         """Callback for dispatching updates for fast commands
