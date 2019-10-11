@@ -62,10 +62,12 @@ class Jackfruit:
         :param update: Update object
         :param context: Callback context
         """
-        self.before_dispatch(update, context)
-        context.chat_data[self._state_key] = state
-        self.STATE[state].show(update, context)
-        self.after_dispatch(update, context)
+        try:
+            self.before_dispatch(update, context)
+            context.chat_data[self._state_key] = state
+            self.STATE[state].show(update, context)
+        finally:
+            self.after_dispatch(update, context)
 
     def before_dispatch(self, update: 'Update', context: 'CallbackContext') -> None:
         """Call before any dispatch method
