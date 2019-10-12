@@ -1,11 +1,7 @@
 from .generic import GenericView, GenericDataInputView
 from .menu import MenuView
-from .text import TextDataInputView
-from .photo import PhotoDataInputView
-from .audio import AudioDataInputView
-from .document import DocumentDataInputView
-from .video import VideoDataInputView
-from .sticker import StickerDataInputView
+from .input import (TextDataInputView, PhotoDataInputView, DocumentDataInputView, AudioDataInputView,
+                    VideoDataInputView, StickerDataInputView)
 
-__all__ = ['GenericView', 'GenericDataInputView', 'MenuView', 'TextDataInputView', 'PhotoDataInputView',
+__all__ = ['GenericView', 'GenericDataInputView', 'MenuView', 'PhotoDataInputView',
            'AudioDataInputView', 'DocumentDataInputView', 'VideoDataInputView', 'StickerDataInputView', ]
