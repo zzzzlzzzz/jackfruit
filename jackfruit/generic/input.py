@@ -81,3 +81,16 @@ class StickerDataInputView(GenericDataInputView):
             return update.message.sticker
         except AttributeError:
             return None
+
+
+class VoiceDataInputView(GenericDataInputView):
+    def get_user_input(self, update: 'Update') -> Any:
+        """Return user input from update
+
+        :param update: Update object
+        :return: Target user data
+        """
+        try:
+            return update.message.voice
+        except AttributeError:
+            return None

@@ -1,7 +1,7 @@
 from pytest import fixture, mark
 
 from jackfruit import (GenericDataInputView, AudioDataInputView, DocumentDataInputView, PhotoDataInputView,
-                       StickerDataInputView, TextDataInputView, VideoDataInputView)
+                       StickerDataInputView, TextDataInputView, VideoDataInputView, VoiceDataInputView, )
 
 
 @fixture()
@@ -39,6 +39,7 @@ def test_process_with_data(view, update, context):
                       (StickerDataInputView, 'sticker'),
                       (TextDataInputView, 'text'),
                       (VideoDataInputView, 'video'),
+                      (VoiceDataInputView, 'voice'),
                   ])
 def test_data_input_view(test_class, message_attr, update):
     class MessageAttrMock:
@@ -55,6 +56,7 @@ def test_data_input_view(test_class, message_attr, update):
                       StickerDataInputView,
                       TextDataInputView,
                       VideoDataInputView,
+                      VoiceDataInputView,
                   ])
 def test_data_input_view_without_message(test_class, update):
     update.message = None
@@ -69,6 +71,7 @@ def test_data_input_view_without_message(test_class, update):
                       StickerDataInputView,
                       TextDataInputView,
                       VideoDataInputView,
+                      VoiceDataInputView,
                   ])
 def test_data_input_view_without_attr(test_class, update):
     assert not test_class().get_user_input(update)
